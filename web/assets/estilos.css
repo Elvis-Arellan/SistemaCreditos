@@ -26,7 +26,7 @@ a:hover {
     color: #e64a19;
 }
 
-/* HEADER */
+
 header {
     background-color: #192AE6;
     padding: 15px 0;
@@ -52,7 +52,7 @@ header .titulo {
     color: #ffccbc !important;
 }
 
-/* MAIN */
+
 main {
     margin-top: 100px;
     margin-bottom: 88px;
@@ -97,7 +97,7 @@ main {
     background-color: #dc3b0b;
 }
 
-/* FOOTER */
+
 footer {
     background-color: #172136;
     color: white;
@@ -129,16 +129,44 @@ footer a:hover {
     align-items: center;
 }
 
-    .table-transparent {
-        background-color: transparent !important;
-    }
+.table-transparent {
+    background-color: transparent !important;
+}
 
-    .table-transparent thead, 
-    .table-transparent tbody, 
-    .table-transparent tr, 
-    .table-transparent td, 
-    .table-transparent th {
-        background-color: transparent !important;
-        color: white; /* o el color que quieras */
-        border-color: rgba(255,255,255,0.1); /* bordes suaves opcionales */
-    }
+.table-transparent thead,
+.table-transparent tbody,
+.table-transparent tr,
+.table-transparent td,
+.table-transparent th {
+    background-color: transparent !important;
+    color: white;
+    border-color: rgba(255,255,255,0.1);
+}
+
+.admin-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.usuario-badge {
+    background: #28a745;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.btn-registro {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border: none;
+    color: white;
+    padding: 12px;
+    font-weight: bold;
+}
+.btn-registro:hover {
+    opacity: 0.9;
+    color: white;
+}

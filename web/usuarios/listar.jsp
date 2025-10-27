@@ -15,36 +15,9 @@
         <meta charset="UTF-8">
         <title>Gestión de Usuarios - ADMIN</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/estilos.css" />
-        <style>
-            .admin-badge {
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-                color: white;
-                padding: 5px 15px;
-                border-radius: 20px;
-                font-size: 0.8rem;
-                font-weight: bold;
-            }
-            .usuario-badge {
-                background: #28a745;
-                color: white;
-                padding: 5px 15px;
-                border-radius: 20px;
-                font-size: 0.8rem;
-                font-weight: bold;
-            }
-            .btn-registro {
-                background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-                border: none;
-                color: white;
-                padding: 12px;
-                font-weight: bold;
-            }
-            .btn-registro:hover {
-                opacity: 0.9;
-                color: white;
-            }
-        </style>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin-panel.css" />
+         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/estilos.css" />
+
     </head>
 
     <body>
