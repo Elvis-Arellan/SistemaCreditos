@@ -13,9 +13,9 @@ import servicios.impl.ClienteServiciosImpl;
     "/clientes/listar",
     "/clientes/registrar",
     "/clientes/guardar",
-    "/clientes/editar",      
-    "/clientes/actualizar",  
-    "/clientes/eliminar" 
+    "/clientes/editar",
+    "/clientes/actualizar",
+    "/clientes/eliminar"
 })
 public class ClienteControlador extends HttpServlet {
 
@@ -46,9 +46,9 @@ public class ClienteControlador extends HttpServlet {
         } else if ("/clientes/registrar".equals(path)) {
             mostrarFormularioRegistro(request, response);
         } else if ("/clientes/editar".equals(path)) {
-            mostrarFormularioEdicion(request, response);      
+            mostrarFormularioEdicion(request, response);
         } else if ("/clientes/eliminar".equals(path)) {
-            eliminarCliente(request, response);               
+            eliminarCliente(request, response);
         }
     }
 
@@ -66,6 +66,8 @@ public class ClienteControlador extends HttpServlet {
 
         if ("/clientes/guardar".equals(path)) {
             guardarCliente(request, response);
+        } else if ("/clientes/actualizar".equals(path)) {
+            actualizarCliente(request, response);
         }
     }
 
@@ -240,49 +242,47 @@ public class ClienteControlador extends HttpServlet {
             request.getRequestDispatcher("/clientes/registrar.jsp").forward(request, response);
         }
     }
-    
+
     private void mostrarFormularioEdicion(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         try {
             String idParam = request.getParameter("id");
-            
+
             if (idParam == null || idParam.trim().isEmpty()) {
                 System.err.println("❌ ID de cliente no proporcionado");
                 request.getSession().setAttribute("error", "ID de cliente inválido");
                 response.sendRedirect(request.getContextPath() + "/clientes/listar");
                 return;
             }
-            
+
             int idCliente = Integer.parseInt(idParam);
             System.out.println("📝 Cargando cliente para editar - ID: " + idCliente);
-            
-            
+
             Cliente cliente = clienteService.obtenerClientePorId(idCliente);
-            
+
             if (cliente == null) {
                 System.err.println("❌ Cliente no encontrado con ID: " + idCliente);
                 request.getSession().setAttribute("error", "Cliente no encontrado");
                 response.sendRedirect(request.getContextPath() + "/clientes/listar");
                 return;
             }
-            
-            
+
             HttpSession session = request.getSession();
             Integer idUsuario = (Integer) session.getAttribute("idUsuario");
-            
+
             if (cliente.getId_usuario() != idUsuario) {
                 System.err.println("⛔ Usuario " + idUsuario + " intentó editar cliente de otro usuario");
                 request.getSession().setAttribute("error", "No tienes permiso para editar este cliente");
                 response.sendRedirect(request.getContextPath() + "/clientes/listar");
                 return;
             }
-            
+
             System.out.println("✅ Cliente cargado: " + cliente.getNombre() + " " + cliente.getApellido());
-            
+
             request.setAttribute("cliente", cliente);
             request.getRequestDispatcher("/clientes/editar.jsp").forward(request, response);
-            
+
         } catch (NumberFormatException e) {
             System.err.println("❌ ID de cliente inválido: " + e.getMessage());
             request.getSession().setAttribute("error", "ID de cliente inválido");
@@ -294,15 +294,14 @@ public class ClienteControlador extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/clientes/listar");
         }
     }
-    
+
     private void actualizarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         try {
             HttpSession session = request.getSession();
             Integer idUsuario = (Integer) session.getAttribute("idUsuario");
-            
-            
+
             String idParam = request.getParameter("id_cliente");
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
@@ -310,46 +309,43 @@ public class ClienteControlador extends HttpServlet {
             String telefono = request.getParameter("telefono");
             String saldoStr = request.getParameter("saldo");
             String estado = request.getParameter("estado");
-            
+
             System.out.println("📝 Actualizando cliente ID: " + idParam);
-            
+
             if (idParam == null || idParam.trim().isEmpty()) {
                 request.setAttribute("error", "ID de cliente no proporcionado");
                 response.sendRedirect(request.getContextPath() + "/clientes/listar");
                 return;
             }
-            
+
             int idCliente = Integer.parseInt(idParam);
-            
-            
+
             Cliente clienteActual = clienteService.obtenerClientePorId(idCliente);
-            
+
             if (clienteActual == null) {
                 request.getSession().setAttribute("error", "Cliente no encontrado");
                 response.sendRedirect(request.getContextPath() + "/clientes/listar");
                 return;
             }
-            
+
             if (clienteActual.getId_usuario() != idUsuario) {
                 System.err.println("⛔ Usuario " + idUsuario + " intentó actualizar cliente de otro usuario");
                 request.getSession().setAttribute("error", "No tienes permiso para editar este cliente");
                 response.sendRedirect(request.getContextPath() + "/clientes/listar");
                 return;
             }
-            
-           
-            if (nombre == null || nombre.trim().isEmpty() || 
-                apellido == null || apellido.trim().isEmpty() || 
-                telefono == null || telefono.trim().isEmpty()) {
+
+            if (nombre == null || nombre.trim().isEmpty()
+                    || apellido == null || apellido.trim().isEmpty()
+                    || telefono == null || telefono.trim().isEmpty()) {
                 request.setAttribute("error", "Todos los campos obligatorios deben estar completos");
                 request.setAttribute("cliente", clienteActual);
                 request.getRequestDispatcher("/clientes/editar.jsp").forward(request, response);
                 return;
             }
-            
+
             BigDecimal saldo = new BigDecimal(saldoStr != null && !saldoStr.trim().isEmpty() ? saldoStr : "0");
-            
-            
+
             Cliente clienteActualizado = new Cliente();
             clienteActualizado.setId_cliente(idCliente);
             clienteActualizado.setId_usuario(idUsuario);
@@ -359,9 +355,9 @@ public class ClienteControlador extends HttpServlet {
             clienteActualizado.setTelefono(telefono.trim());
             clienteActualizado.setSaldo(saldo);
             clienteActualizado.setEstado(estado != null && !estado.isEmpty() ? estado : "ACTIVO");
-            
+
             boolean actualizado = clienteService.actualizarCliente(clienteActualizado);
-            
+
             if (actualizado) {
                 System.out.println("✅ Cliente actualizado exitosamente - ID: " + idCliente);
                 session.setAttribute("mensaje", "Cliente actualizado exitosamente");
@@ -372,7 +368,7 @@ public class ClienteControlador extends HttpServlet {
                 request.setAttribute("cliente", clienteActualizado);
                 request.getRequestDispatcher("/clientes/editar.jsp").forward(request, response);
             }
-            
+
         } catch (Exception e) {
             System.err.println("❌ Error en actualizarCliente: " + e.getMessage());
             e.printStackTrace();
@@ -380,41 +376,41 @@ public class ClienteControlador extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/clientes/listar");
         }
     }
-    
+
     private void eliminarCliente(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         try {
             String idParam = request.getParameter("id");
-            
+
             if (idParam == null || idParam.trim().isEmpty()) {
                 request.getSession().setAttribute("error", "ID de cliente inválido");
                 response.sendRedirect(request.getContextPath() + "/clientes/listar");
                 return;
             }
-            
+
             int idCliente = Integer.parseInt(idParam);
-            
+
             HttpSession session = request.getSession();
             Integer idUsuario = (Integer) session.getAttribute("idUsuario");
-            
+
             Cliente cliente = clienteService.obtenerClientePorId(idCliente);
-            
+
             if (cliente == null) {
                 request.getSession().setAttribute("error", "Cliente no encontrado");
                 response.sendRedirect(request.getContextPath() + "/clientes/listar");
                 return;
             }
-            
+
             if (cliente.getId_usuario() != idUsuario) {
                 System.err.println("⛔ Usuario " + idUsuario + " intentó eliminar cliente de otro usuario");
                 request.getSession().setAttribute("error", "No tienes permiso para eliminar este cliente");
                 response.sendRedirect(request.getContextPath() + "/clientes/listar");
                 return;
             }
-            
+
             boolean eliminado = clienteService.eliminarCliente(idCliente);
-            
+
             if (eliminado) {
                 System.out.println("✅ Cliente eliminado exitosamente - ID: " + idCliente);
                 session.setAttribute("mensaje", "Cliente eliminado exitosamente");
@@ -422,9 +418,9 @@ public class ClienteControlador extends HttpServlet {
                 System.err.println("❌ No se pudo eliminar el cliente - ID: " + idCliente);
                 session.setAttribute("error", "No se pudo eliminar el cliente");
             }
-            
+
             response.sendRedirect(request.getContextPath() + "/clientes/listar");
-            
+
         } catch (Exception e) {
             System.err.println("❌ Error al eliminar cliente: " + e.getMessage());
             e.printStackTrace();
