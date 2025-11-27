@@ -120,7 +120,7 @@
                                     </td>
                                     <td>
                                         <a href="${pageContext.request.contextPath}/clientes/editar?id=<%= c.getId_cliente()%>" class="btn btn-warning btn-sm fw-bold">Editar</a>
-                                        <a href="${pageContext.request.contextPath}/movimientos/historial.jsp?id=<%= c.getId_cliente()%>" class="btn btn-danger btn-sm fw-bold">Historial</a>
+                                        <a href="${pageContext.request.contextPath}/movimientos/historial?id=<%= c.getId_cliente()%>" class="btn btn-danger btn-sm fw-bold">Historial</a>
                                     </td>
                                 </tr>
                                 <% count++;
