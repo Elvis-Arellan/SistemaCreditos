@@ -16,29 +16,26 @@
         <title>Gestión de Usuarios - ADMIN</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin-panel.css" />
-         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/estilos.css" />
-
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/estilos.css" />
     </head>
 
     <body>
         <header style="background: #192AE6; padding: 15px 0; margin-bottom: 20px;">
             <div class="container d-flex justify-content-between align-items-center">
                 <a href="${pageContext.request.contextPath}/usuarios/listar" class="titulo text-white text-decoration-none">
-                     Panel de Administración
+                    Panel de Administración
                 </a>
 
                 <div class="d-flex align-items-center gap-3">
-                    <span class="admin-badge">
-                        ADMIN
-                    </span>
+                    <span class="admin-badge">ADMIN</span>
 
                     <span class="text-white">
-                         <strong><%= session.getAttribute("nombreCompleto") != null ? session.getAttribute("nombreCompleto") : "Administrador"%></strong>
+                        <strong><%= session.getAttribute("nombreCompleto") != null ? session.getAttribute("nombreCompleto") : "Administrador"%></strong>
                     </span>
 
                     <a href="${pageContext.request.contextPath}/login?action=logout" 
                        class="btn btn-danger btn-sm">
-                         Cerrar Sesión
+                        Cerrar Sesión
                     </a>
                 </div>
             </div>
@@ -73,9 +70,12 @@
                 <div class="col-lg-9">
                     <div class="carrito-container p-4 rounded tabla-container">
                         <div class="d-flex justify-content-between align-items-center mb-3">
-                            <h4 class="fw-bold mb-0"> Usuarios del Sistema</h4>
+                            <h4 class="fw-bold mb-0">Usuarios del Sistema</h4>
                             <div class="input-group w-50">
-                                <input type="text" id="buscarUsuario" class="form-control rounded-pill" placeholder="Buscar usuario...">
+                                <input type="text" 
+                                       id="buscarUsuario" 
+                                       class="form-control rounded-pill" 
+                                       placeholder="🔍 Buscar usuario...">
                             </div>
                         </div>
 
@@ -111,12 +111,12 @@
                                         </span>
                                         <% } else if (u.getId() == (Integer) session.getAttribute("idUsuario")) { %>
                                         <span class="text-warning">
-                                             Tu cuenta
+                                            Tu cuenta
                                         </span>
                                         <% } else {%>
                                         <button class="btn btn-danger btn-sm fw-bold" 
                                                 onclick="confirmarEliminacion(<%= u.getId()%>, '<%= u.getUsername()%>')">
-                                             Eliminar
+                                            Eliminar
                                         </button>
                                         <% } %>
                                     </td>
@@ -126,7 +126,7 @@
                                 } else { %>
                                 <tr>
                                     <td colspan="5" class="text-muted">
-                                         No hay usuarios registrados
+                                        No hay usuarios registrados
                                     </td>
                                 </tr>
                                 <% }%>
@@ -176,16 +176,24 @@
                             <%= countUsuarios%>
                         </h3>
                     </div>
-                    <a href="${pageContext.request.contextPath}/usuarios/registro.jsp" 
-                       class="usuario-badge w-100">
+                    <a href="${pageContext.request.contextPath}/usuarios/registro" 
+                       class="usuario-badge w-100 text-center">
                         Crear Nuevo Usuario
                     </a>  
                 </div>
             </div>
         </main>
 
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/busqueda.js"></script>
+
+        <script>
+            function confirmarEliminacion(id, username) {
+                if (confirm("⚠️ ¿Eliminar al usuario '" + username + "'?\nEsto NO se puede deshacer.")) {
+                    window.location.href = '${pageContext.request.contextPath}/usuarios/eliminar?id=' + id;
+                }
+            }
+        </script>
 
     </body>
 </html>

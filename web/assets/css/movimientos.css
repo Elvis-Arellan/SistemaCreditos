@@ -1,0 +1,354 @@
+
+
+.movimientos-body {
+    background-color: #0a0a0a;
+    color: white;
+    font-family: "Segoe UI", sans-serif;
+    padding: 20px;
+}
+
+.movimientos-header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.movimientos-btn-regresar {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.movimientos-btn-regresar:hover {
+    background-color: #1d4ed8;
+    color: white;
+}
+
+.movimientos-btn-agregar {
+    background-color: #16a34a;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.movimientos-btn-agregar:hover {
+    background-color: #15803d;
+    color: white;
+}
+
+.movimientos-main-container {
+    background-color: #1a2332;
+    border-radius: 12px;
+    padding: 30px;
+}
+
+.movimientos-cliente-header {
+    background-color: #243447;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.movimientos-cliente-nombre {
+    font-size: 18px;
+    font-weight: 600;
+    color: #f1f5f9;
+    margin-bottom: 0;
+}
+
+.movimientos-titulo {
+    font-size: 24px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.movimientos-tabla {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.movimientos-tabla thead {
+    background-color: transparent;
+}
+
+.movimientos-tabla th {
+    color: #94a3b8;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    padding: 12px;
+    border-bottom: 2px solid #334155;
+    text-align: center;
+}
+
+.movimientos-tabla td {
+    color: #e2e8f0;
+    padding: 15px 12px;
+    vertical-align: middle;
+    border-bottom: 1px solid #334155;
+    text-align: center;
+}
+
+.movimientos-tabla tbody tr:hover {
+    background-color: #243447;
+}
+
+.movimientos-badge-fiado {
+    background-color: #dc2626;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.movimientos-badge-pago {
+    background-color: #16a34a;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.movimientos-estado-activo {
+    background-color: #16a34a;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.movimientos-stats-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.movimientos-stat-card {
+    background-color: #1a2332;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.movimientos-stat-label {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.movimientos-stat-value {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.movimientos-stat-fiado {
+    color: #dc2626;
+}
+
+.movimientos-stat-pagado {
+    color: #16a34a;
+}
+
+.movimientos-stat-movimientos {
+    color: #2563eb;
+}
+
+.movimientos-stat-saldo {
+    color: #E64A19;
+}
+
+.movimientos-content-wrapper {
+    margin-right: 320px;
+}
+
+.movimientos-descripcion-cell {
+    text-align: left !important;
+    max-width: 300px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movimientos-no-movimientos {
+    text-align: center;
+    color: #64748b;
+    padding: 40px;
+    font-size: 16px;
+}
+
+@media (max-width: 1400px) {
+    .movimientos-stats-container {
+        position: static;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    .movimientos-stat-card {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .movimientos-content-wrapper {
+        margin-right: 0;
+    }
+}
+
+
+.movimientos-registro-body {
+    background-color: #0a0a0a;
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: "Segoe UI", sans-serif;
+}
+
+.movimientos-container-registro {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.movimientos-btn-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.movimientos-btn-guardar {
+    background-color: #16a34a;
+    border: 2px solid #22c55e;
+    color: white;
+    padding: 12px 40px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.movimientos-btn-guardar:hover {
+    background-color: #15803d;
+    border-color: #16a34a;
+}
+
+.movimientos-card-registro {
+    background-color: #1e293b;
+    border-radius: 12px;
+    padding: 35px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.movimientos-cliente-info {
+    background-color: #0f172a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    border-left: 4px solid #2563eb;
+}
+
+.movimientos-cliente-info h5 {
+    color: #f1f5f9;
+    margin-bottom: 10px;
+}
+
+.movimientos-cliente-info p {
+    color: #94a3b8;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.movimientos-saldo-actual {
+    font-size: 24px;
+    font-weight: 700;
+    color: #E64A19;
+    margin-top: 10px;
+}
+
+.movimientos-card-title {
+    color: #f1f5f9;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.movimientos-form-label {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.movimientos-form-control,
+.movimientos-form-select {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #f1f5f9;
+    padding: 12px 20px;
+    font-size: 15px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.movimientos-form-control:focus,
+.movimientos-form-select:focus {
+    background-color: #0f172a;
+    border-color: #2563eb;
+    color: #f1f5f9;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    outline: none;
+}
+
+.movimientos-form-select option {
+    background-color: #0f172a;
+    color: #f1f5f9;
+}
+
+.movimientos-textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.movimientos-info-box {
+    background-color: #0f172a;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #2563eb;
+}
+
+.movimientos-info-text {
+    color: #94a3b8;
+    margin: 0;
+    font-size: 13px;
+}
+
+.movimientos-info-text strong {
+    color: #f1f5f9;
+}
+
+.movimientos-required {
+    color: #ef4444;
+}

@@ -4,7 +4,6 @@
 <%
     List<Cliente> clientes = (List<Cliente>) request.getAttribute("clientes");
     BigDecimal saldoTotal = (BigDecimal) request.getAttribute("saldoTotal");
-    System.out.println("🟡 JSP listar.jsp cargado - Clientes: " + (clientes != null ? clientes.size() : "null"));
 %>
 <!DOCTYPE html>
 <html>
@@ -17,34 +16,25 @@
 
     <body>
 
-        <div class="container mt-3">
-            <div class="alert alert-info">
-                <strong>Depuración:</strong> 
-                Clientes en request: <%= clientes != null ? clientes.size() : "null"%>
-            </div>
-        </div>
-
-
         <header style="background: #192AE6; padding: 15px 0; margin-bottom: 20px;">
             <div class="container d-flex justify-content-between align-items-center">
                 <a href="${pageContext.request.contextPath}/clientes/listar" class="titulo text-white text-decoration-none">
-                     Sistema de créditos para MiniMarkets
+                    Sistema de créditos para MiniMarkets
                 </a>
 
                 <div class="d-flex align-items-center gap-3">
-
                     <span class="text-white">
-                         Bienvenido: <strong><%= session.getAttribute("nombreCompleto") != null ? session.getAttribute("nombreCompleto") : "Usuario"%></strong>
+                        Bienvenido: <strong><%= session.getAttribute("nombreCompleto") != null ? session.getAttribute("nombreCompleto") : "Usuario"%></strong>
                     </span>
-
 
                     <a href="${pageContext.request.contextPath}/login?action=logout" 
                        class="btn btn-danger btn-sm">
-                         Cerrar Sesión
+                        Cerrar Sesión
                     </a>
                 </div>
             </div>
         </header>
+
         <div class="container mt-3">
             <%
                 String mensaje = (String) session.getAttribute("mensaje");
@@ -69,10 +59,9 @@
             <% } %>
         </div>
 
-
         <main class="container py-5">
             <div class="text mb-4">
-                <a href="${pageContext.request.contextPath}/clientes/registrar.jsp" class="btn" style="background-color: #192AE6; color: white;">Agregar Clientes --></a>
+                <a href="${pageContext.request.contextPath}/clientes/registrar" class="btn" style="background-color: #192AE6; color: white;">Agregar Clientes --></a>
             </div>
 
             <div class="row g-4">
@@ -83,7 +72,10 @@
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="fw-bold mb-0">Listado de Clientes</h4>
                             <div class="input-group w-50">
-                                <input type="text" class="form-control rounded-pill" placeholder="Buscar...">
+                                <input type="text" 
+                                       id="buscarCliente" 
+                                       class="form-control rounded-pill" 
+                                       placeholder="🔍 Buscar cliente...">
                             </div>
                         </div>
 
@@ -99,7 +91,7 @@
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tablaClientes">
                                 <% if (clientes != null && !clientes.isEmpty()) {
                                         int count = 1;
                                         for (Cliente c : clientes) {%>
@@ -127,8 +119,8 @@
                                     }
                                 } else { %>
                                 <tr>
-                                    <td colspan="7" ">  
-                                         No tienes clientes registrados.
+                                    <td colspan="7">  
+                                        No tienes clientes registrados.
                                     </td>
                                 </tr>
                                 <% }%>
@@ -136,7 +128,6 @@
                         </table>
                     </div>
                 </div>
-
 
                 <div class="col-lg-4 d-flex flex-column gap-4">
                     <div class="carrito-container p-4 rounded text-center">
@@ -164,7 +155,7 @@
                     <div class="col-md-3">
                         <h4>Tienda</h4>
                         <ul class="list-unstyled">
-                            <li><a href="${pageContext.request.contextPath}/index.jsp">Todos los clientes</a></li>
+                            <li><a href="${pageContext.request.contextPath}/clientes/listar">Todos los clientes</a></li>
                             <li><a href="#">Nuevos clientes</a></li>
                             <li><a href="#">Deudores</a></li>
                         </ul>
@@ -172,7 +163,7 @@
                     <div class="col-md-3">
                         <h4>Empresa</h4>
                         <ul class="list-unstyled">
-                            <li><a href="${pageContext.request.contextPath}/nosotros.jsp">Nosotros</a></li>
+                            <li><a href="#">Nosotros</a></li>
                             <li><a href="https://www.google.com.pe/maps/place/Gamarra,+La+Victoria+15018" target="_blank">Ubicación</a></li>
                         </ul>
                     </div>
@@ -195,6 +186,7 @@
         </footer>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/busqueda.js"></script>
 
     </body>
 </html>
